@@ -1,45 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium 3D Coffee Shop — Complete Website Business</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: linear-gradient(135deg, #1a0f08, #3d2317, #2c1810); color: #f5e6d3; min-height: 100vh; }
-        .container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
-        header { text-align: center; padding: 40px 0; }
-        h1 { font-size: 2.5rem; color: #d4a574; margin-bottom: 10px; }
-        .tagline { opacity: 0.8; font-size: 1.1rem; }
-        .card { background: rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; border: 1px solid rgba(212,165,116,0.2); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
-        .price { text-align: center; font-size: 3rem; font-weight: bold; color: #10b981; margin: 25px 0; }
-        ul { margin: 25px 0; padding-left: 25px; line-height: 2; font-size: 1.05rem; }
-        li { border-bottom: 1px solid rgba(212,165,116,0.1); padding: 8px 0; }
-        footer { text-align: center; margin-top: 40px; opacity: 0.5; font-size: 0.9rem; padding-top: 20px; border-top: 1px solid rgba(212,165,116,0.1); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>RVD STUDIO | Better Than ZARA - 3D Winter</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;overflow:hidden;font-family:'Space Grotesk',sans-serif;touch-action:none}
+#canvas{position:fixed;top:0;left:0;width:100%;height:100%}
+.top{position:fixed;top:0;width:100%;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;z-index:10;mix-blend-mode:difference}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-1px}
+.badge{border:1px solid #fff;padding:6px 12px;border-radius:100px;font-size:10px;letter-spacing:2px}
+.center{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;z-index:5}
+.center h1{font-family:'Syne',sans-serif;font-size:11vw;line-height:0.85;letter-spacing:-4px;font-weight:800}
+.center h1 span{display:block;font-size:12px;letter-spacing:8px;margin-top:15px;font-family:'Space Grotesk';font-weight:400;opacity:0.6}
+.controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);padding:12px 16px;border-radius:100px;display:flex;gap:10px;z-index:10}
+.dot{width:32px;height:32px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:0.3s}
+.dot.active{border-color:#fff;transform:scale(1.2)}
+.info{position:fixed;bottom:20px;left:20px;z-index:10;line-height:1.4}
+.info h3{font-family:'Syne';font-size:18px}
+.info p{opacity:0.5;font-size:12px;letter-spacing:1px}
+.price{position:fixed;bottom:20px;right:20px;z-index:10;text-align:right}
+.price b{font-family:'Syne';font-size:26px}
+.price p{opacity:0.5;font-size:11px}
+.hint{position:fixed;top:50%;left:20px;writing-mode:vertical-rl;opacity:0.3;font-size:10px;letter-spacing:4px;z-index:10}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>☕ 3D Coffee Shop Business</h1>
-            <p class="tagline">Complete Professional Website — Ready to Own & Operate</p>
-        </header>
-        <div class="card">
-            <h2 style="text-align:center; font-size:1.6rem; color:#d4a574;">For Sale</h2>
-            <div class="price">$5,000 USD</div>
-            <h3 style="margin-bottom:15px; color:#d4a574;">What You Get:</h3>
-            <ul>
-                <li>✅ Fully designed professional website — ready to publish</li>
-                <li>✅ Mobile-responsive layout — looks great on all devices</li>
-                <li>✅ Premium branding & modern 3D-style design</li>
-                <li>✅ Clean, well-structured code — easy to customize</li>
-                <li>✅ Ready for products, affiliate links & monetization</li>
-                <li>✅ Full ownership — no recurring fees</li>
-                <li>✅ Instant delivery after payment</li>
-            </ul>
-            <p style="text-align:center; margin-top:30px; font-size:1rem; opacity:0.8;">Payment via Payoneer · Secure & Verified</p>
-        </div>
-        <footer>© 2026 3D Coffee Shop — All Rights Reserved</footer>
-    </div>
+<div id="canvas"></div>
+<div class="top"><div class="logo">RVD STUDIO.</div><div class="badge">BETTER THAN ZARA®</div></div>
+<div class="center"><h1>WINTER<span>320GSM HEAVY - TOUCH TO MOVE</span></h1></div>
+<div class="hint">DRAG • TOUCH • MOVE • 3D</div>
+<div class="info"><h3 id="name">FULL-HATA GOL GOLA</h3><p>EXPORT QUALITY • EUROPEAN CUT</p></div>
+<div class="price"><b id="price">$89</b><p>EXCLUSIVE DROP 001</p></div>
+<div class="controls">
+<div class="dot active" style="background:#8A9A7B" data-color="#8A9A7B" data-name="MOSS GREEN"></div>
+<div class="dot" style="background:#111111" data-color="#111111" data-name="MIDNIGHT BLACK"></div>
+<div class="dot" style="background:#E8E0D0" data-color="#E8E0D0" data-name="CREAM BEIGE"></div>
+<div class="dot" style="background:#C9A86A" data-color="#C9A86A" data-name="LUXE GOLD"></div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+let scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x0a0a0a, 8, 18);
+let camera=new THREE.PerspectiveCamera(35, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(0,0.2,3.2);
+let renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+document.getElementById('canvas').appendChild(renderer.domElement);
+
+// Lights - Studio like ZARA
+let amb=new THREE.AmbientLight(0xffffff,0.6);scene.add(amb);
+let dir=new THREE.DirectionalLight(0xffffff,1.2);dir.position.set(2,3,2);scene.add(dir);
+let dir2=new THREE.DirectionalLight(0xffffff,0.4);dir2.position.set(-2,1,-2);scene.add(dir2);
+
+// Create Premium T-Shirt Geometry - Folded & Realistic
+function createShirt(color){
+ let group=new THREE.Group();
+ // Main body - using extruded shape for fabric thickness
+ let shape=new THREE.Shape();
+ shape.moveTo(-0.7, -0.8); shape.lineTo(0.7, -0.8); shape.lineTo(0.65, 0.6);
+ shape.lineTo(0.9, 0.7); shape.lineTo(0.5, 0.9); shape.lineTo(0, 1.0);
+ shape.lineTo(-0.5, 0.9); shape.lineTo(-0.9, 0.7); shape.lineTo(-0.65, 0.6);
+ shape.lineTo(-0.7, -0.8);
+ let geo=new THREE.ShapeGeometry(shape, 20);
+ // Add fabric wrinkles - position attribute
+ let pos=geo.attributes.position;
+ for(let i=0;i<pos.count;i++){
+   let x=pos.getX(i);let y=pos.getY(i);
+   let wrinkle=Math.sin(x*8)*0.02 + Math.cos(y*6)*0.02;
+   pos.setZ(i, wrinkle + Math.random()*0.01);
+ }
+ pos.needsUpdate=true; geo.computeVertexNormals();
+ let mat=new THREE.MeshStandardMaterial({color:color, roughness:0.85, metalness:0.05, side:THREE.DoubleSide});
+ let mesh=new THREE.Mesh(geo, mat);
+ // Collar
+ let collarGeo=new THREE.TorusGeometry(0.28,0.04,12,30, Math.PI*1.8);
+ let collarMat=new THREE.MeshStandardMaterial({color:color, roughness:0.8});
+ let collar=new THREE.Mesh(collarGeo,collarMat);
+ collar.rotation.x=Math.PI/2; collar.rotation.z=Math.PI*0.6; collar.position.set(0,0.75,0.05);
+ // Sleeves fold detail
+ let sleeveGeo=new THREE.PlaneGeometry(0.35,0.3,8,8);
+ let sPos=sleeveGeo.attributes.position;
+ for(let i=0;i<sPos.count;i++){ sPos.setZ(i, Math.sin(sPos.getX(i)*10)*0.03); }
+ let sleeve1=new THREE.Mesh(sleeveGeo, mat); sleeve1.position.set(-0.78,0.45,0.02); sleeve1.rotation.z=0.2;
+ let sleeve2=new THREE.Mesh(sleeveGeo, mat); sleeve2.position.set(0.78,0.45,0.02); sleeve2.rotation.z=-0.2;
+ group.add(mesh,collar,sleeve1,sleeve2);
+ group.rotation.x=-0.15;
+ return group;
+}
+
+let currentColor="#8A9A7B";
+let shirt=createShirt(currentColor);
+scene.add(shirt);
+
+// Physics - Touch to Wobble
+let targetRot={x:0,y:0};
+let currentRot={x:0,y:0};
+let velocity={x:0,y:0};
+let isDragging=false; let lastX=0,lastY=0;
+
+function onDown(x,y){ isDragging=true; lastX=x; lastY=y; velocity.x=0; velocity.y=0; }
+function onMove(x,y){
+ if(!isDragging) return;
+ let dx=(x-lastX)*0.01; let dy=(y-lastY)*0.01;
+ targetRot.y+=dx; targetRot.x+=dy;
+ velocity.x=dx*0.8; velocity.y=dy*0.8;
+ lastX=x; lastY=y;
+}
+function onUp(){ isDragging=false; }
+
+addEventListener('mousedown',e=>onDown(e.clientX,e.clientY));
+addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
+addEventListener('mouseup',onUp);
+addEventListener('touchstart',e=>onDown(e.touches[0].clientX,e.touches[0].clientY),{passive:false});
+addEventListener('touchmove',e=>{e.preventDefault(); onMove(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+addEventListener('touchend',onUp);
+
+// Color Switch
+document.querySelectorAll('.dot').forEach(d=>{
+ d.addEventListener('click',()=>{
+   document.querySelectorAll('.dot').forEach(x=>x.classList.remove('active'));
+   d.classList.add('active');
+   currentColor=d.dataset.color;
+   document.getElementById('name').innerText=d.dataset.name + " • FULL-HATA";
+   scene.remove(shirt);
+   shirt=createShirt(currentColor);
+   // Animate in
+   shirt.scale.set(0.8,0.8,0.8);
+   let s=0;
+   let anim=setInterval(()=>{s+=0.08; shirt.scale.set(s,s,s); if(s>=1) clearInterval(anim)},16);
+   scene.add(shirt);
+ });
+});
+
+// Render loop with spring physics - kapor norbe!
+function animate(){
+ requestAnimationFrame(animate);
+ if(!isDragging){
+   targetRot.y+=0.003; // auto slow rotate
+   // spring back
+   velocity.x*=0.92; velocity.y*=0.92;
+   targetRot.x+=velocity.y*0.1;
+   targetRot.y+=velocity.x*0.1;
+ }
+ // Smooth lerp
+ currentRot.x+=(targetRot.x-currentRot.x)*0.08;
+ currentRot.y+=(targetRot.y-currentRot.y)*0.08;
+ shirt.rotation.y=currentRot.y;
+ shirt.rotation.x=currentRot.x + Math.sin(Date.now()*0.001)*0.05; // subtle breathing like fabric wind
+ shirt.position.y=Math.sin(Date.now()*0.0008)*0.05;
+ renderer.render(scene,camera);
+}
+animate();
+
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
 </body>
 </html>
